@@ -1,0 +1,11 @@
+{
+  "domain": "receptenboek",
+  "name": "Mijn Receptenboek",
+  "documentation": "https://github.com/custom/receptenboek",
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": [],
+  "version": "1.0.0",
+  "config_flow": false,
+  "integration_type": "system"
+}

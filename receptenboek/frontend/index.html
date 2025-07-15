@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Receptenboek</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> Mijn Receptenboek</h1>
+        </header>
+
+        <div id="main-view" class="main-content">
+            <div class="controls">
+                <div class="dropdown-container">
+                    <label for="category-select">Categorie:</label>
+                    <select id="category-select">
+                        <option value="">Selecteer categorie...</option>
+                    </select>
+                </div>
+                
+                <div class="dropdown-container">
+                    <label for="recipe-select">Recept:</label>
+                    <select id="recipe-select" disabled>
+                        <option value="">Selecteer recept...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="new-recipe-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nieuw recept aanmaken
+                </button>
+                <button id="edit-recipe-btn" class="btn btn-secondary" disabled>
+                    <i class="fas fa-edit"></i> Recept bewerken
+                </button>
+                <button id="delete-recipe-btn" class="btn btn-danger" disabled>
+                    <i class="fas fa-trash"></i> Recept verwijderen
+                </button>
+            </div>
+
+            <div class="recipe-display" id="recipe-display">
+                <div class="recipe-content">
+                    <div class="ingredients-section">
+                        <div class="section-header">
+                            <h3>Ingrediënten</h3>
+                            <div class="portions-control">
+                                <label for="portions">Porties:</label>
+                                <input type="number" id="portions" value="4" min="1" max="20">
+                            </div>
+                        </div>
+                        <div id="ingredients-list" class="ingredients-list">
+                            <p class="empty-state">Selecteer een recept om ingrediënten te bekijken</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preparation-section">
+                        <h3>Bereidingswijze</h3>
+                        <div id="preparation-list" class="preparation-list">
+                            <p class="empty-state">Selecteer een recept om bereidingswijze te bekijken</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="recipe-form" class="recipe-form hidden">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2 id="form-title">Nieuw Recept</h2>
+                    <button id="close-form-btn" class="btn btn-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="recipe-form-element">
+                <div class="form-group">
+                    <label for="recipe-name">Naam:</label>
+                    <input type="text" id="recipe-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recipe-category">Categorie:</label>
+                    <select id="recipe-category" required>
+                        <option value="">Selecteer categorie...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-portions">Aantal porties:</label>
+                    <input type="number" id="recipe-portions" value="4" min="1" max="20" required>
+                </div>
+
+                <div class="form-section">
+                    <h3>Gerecht Onderdelen</h3>
+                    <div id="dish-components">
+                        <div class="dish-component">
+                            <div class="component-header">
+                                <input type="text" class="component-name" placeholder="Onderdeel naam (bijv. Taartbodem)" required>
+                                <button type="button" class="btn btn-small btn-danger remove-component">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="ingredients-container">
+                                <h4>Ingrediënten</h4>
+                                <div class="ingredients">
+                                    <div class="ingredient">
+                                        <input type="text" class="ingredient-name" placeholder="Ingrediënt naam" required>
+                                        <input type="number" class="ingredient-amount" placeholder="Hoeveelheid" step="0.1" min="0" required>
+                                        <select class="ingredient-unit" required>
+                                            <option value="">Eenheid</option>
+                                            <option value="gram">gram</option>
+                                            <option value="kilogram">kilogram</option>
+                                            <option value="ml">ml</option>
+                                            <option value="liter">liter</option>
+                                            <option value="tl">tl</option>
+                                            <option value="el">el</option>
+                                            <option value="stuk">stuk</option>
+                                            <option value="cup">cup</option>
+                                            <option value="blik">blik</option>
+                                            <option value="pak">pak</option>
+                                            <option value="snuf">snuf</option>
+                                        </select>
+                                        <button type="button" class="btn btn-small btn-danger remove-ingredient">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-small btn-secondary add-ingredient">
+                                    <i class="fas fa-plus"></i> Ingrediënt toevoegen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-component-btn" class="btn btn-secondary">
+                        <i class="fas fa-plus"></i> Onderdeel toevoegen
+                    </button>
+                </div>
+
+                <div class="form-section">
+                    <h3>Bereidingswijze</h3>
+                    <div id="preparation-steps">
+                        <div class="preparation-step">
+                            <input type="text" class="step-component" placeholder="Onderdeel naam" required>
+                            <textarea class="step-description" placeholder="Beschrijving van de bereidingsstap" required></textarea>
+                            <button type="button" class="btn btn-small btn-danger remove-step">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-step-btn" class="btn btn-secondary">
+                        <i class="fas fa-plus"></i> Stap toevoegen
+                    </button>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Opslaan
+                    </button>
+                    <button type="button" id="cancel-form-btn" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Annuleren
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
